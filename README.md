@@ -26,16 +26,16 @@ A reporting tool for property sale trends in Lincoln, NE, area for buyers and se
 5. Restart the server, and from PHP manager on IIS click on Check phpinfo(). You should see a Phalcon module in the output. 
 
 ### Backedn Installation
-1. Run the migration queries in `csce413\data-parser\data\migrations.sql`. Make sure that your `csce413` database is existent and EMPTY.
-2. Fill in your database by importing `csce413\data-parser\data\data.sql` in your `csce413` database. 
-2. Clone the project in C:\ root directory or C:\inetpub directory.
+1. Clone the project in C:\ root directory or C:\inetpub directory.
 2. Right click on the project folder and go to the `secuirity` tab. Group and Users list should match the Group and Users list of C:\inetpub\wwwroot directory. So add the missing users.
 3. Open IIS. Under connection expand until you select `Sites`. Right click and select `Add Website`.
 4. Enter Site name, set the physical path to the `csce413\backend` folder, and set host name `csce413.loc`.
 5. Open hosts file in `C:\Windows\System32\drivers\etc` and add `127.0.0.1 csce413.loc` at the end of the file. 
 6. Create a MySQL database with the name `csce413`.
 7. Change the database password in app/config/config.php with your MySQL root user password. 
-8. Restart the server and test the API by navigating to `csce413.loc/api/cities`. A list of cities should be returned. 
+8. Run the migration queries in `csce413\data-parser\data\migrations.sql`. Make sure that your `csce413` database is existent and EMPTY.
+9. Fill in your database by importing `csce413\data-parser\data\data.sql` in your `csce413` database. 
+10. Restart the server and test the API by navigating to `csce413.loc/api/cities`. A list of cities should be returned. 
 
 
 ### Frontend Installation
