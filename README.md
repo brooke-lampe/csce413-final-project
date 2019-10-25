@@ -27,7 +27,7 @@ A reporting tool for property sale trends in Lincoln, NE, area for buyers and se
 
 ### Backend Installation
 1. Clone the project in C:\ root directory or C:\inetpub directory.
-2. Right click on the project folder and go to the `secuirity` tab. Group and Users list should match the Group and Users list of C:\inetpub\wwwroot directory. So add the missing users.
+2. Right click on the project folder and go to the `security` tab. Group and Users list should match the Group and Users list of C:\inetpub\wwwroot directory. So add the missing users.
 3. Open IIS. Under connection expand until you select `Sites`. Right click and select `Add Website`.
 4. Enter Site name, set the physical path to the `csce413\backend` folder, and set host name `csce413.loc`.
 5. Open hosts file in `C:\Windows\System32\drivers\etc` and add `127.0.0.1 csce413.loc` at the end of the file. 
