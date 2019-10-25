@@ -25,7 +25,7 @@ A reporting tool for property sale trends in Lincoln, NE, area for buyers and se
 4. Open PHP MAnager from IIS window. Under PHP extentions, click on `Enable or disable an extention`, and make sure that php_phalcon is enabled.
 5. Restart the server, and from PHP manager on IIS click on Check phpinfo(). You should see a Phalcon module in the output. 
 
-### Backedn Installation
+### Backend Installation
 1. Clone the project in C:\ root directory or C:\inetpub directory.
 2. Right click on the project folder and go to the `secuirity` tab. Group and Users list should match the Group and Users list of C:\inetpub\wwwroot directory. So add the missing users.
 3. Open IIS. Under connection expand until you select `Sites`. Right click and select `Add Website`.
