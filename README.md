@@ -2,6 +2,30 @@
 
 A reporting tool for property sale trends in Lincoln, NE, area for buyers and sellers.
 
+## Project Structure
+
+### frontend
+
+* Contains code responsible for the web application's user interface
+* Is written in JavaScript and utilizes the Fusioncharts.js library
+
+### backend
+
+* Contains code responsible for the web application's server, including database accesses and business logic
+* Is written in PHP
+
+### data-parser
+
+* Contains code responsible for parsing the raw .csv data files (which are located in data-parser/data), storing them in objects, and inserting them into the database
+* Is written in Java
+* NOTE: The data files in data-parser/data are the sanitized data files (modified to facilitate parsing). The original data files can be downloaded here:
+  * http://opendata.lincoln.ne.gov/datasets/lancaster-county-property-sales-2018-ytd/data
+  * http://opendata.lincoln.ne.gov/datasets/lancaster-county-property-sales-2017/data
+  * http://opendata.lincoln.ne.gov/datasets/lancaster-county-property-sales-2016/data
+  * http://opendata.lincoln.ne.gov/datasets/lancaster-county-property-sales-2015/data
+  * http://opendata.lincoln.ne.gov/datasets/lancaster-county-property-sales-2014/data
+  * http://opendata.lincoln.ne.gov/datasets/lancaster-county-property-sales-2013/data
+
 ## Installation
 ### Enable IIS on Windows 10
 1. Type `Turn Windows features on` in the search bar in the bottom left and click on `Turn Windows features on or off`. 
