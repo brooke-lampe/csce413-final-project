@@ -7,7 +7,7 @@ A reporting tool for property sale trends in Lincoln, NE, area for buyers and se
 ### frontend
 
 * Contains code responsible for the web application's user interface
-* Is written in JavaScript and utilizes the Fusioncharts.js library
+* Is written in JavaScript and utilizes the React.js framework and the Fusioncharts.js library
 
 ### backend
 
