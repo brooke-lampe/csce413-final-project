@@ -12,12 +12,12 @@ A reporting tool for property sale trends in Lincoln, NE, area for buyers and se
 ### backend
 
 * Contains code responsible for the web application's server, including database accesses and business logic
-* Is written in PHP
+* Is written in PHP and utilizes the Phalcon framework
 
 ### data-parser
 
 * Contains code responsible for parsing the raw .csv data files (which are located in data-parser/data), storing them in objects, and inserting them into the database
-* Is written in Java
+* Is written in Java; its solution is set up for the Eclipse IDE
 * NOTE: The data files in data-parser/data are the sanitized data files (modified to facilitate parsing). The original data files can be downloaded here:
   * http://opendata.lincoln.ne.gov/datasets/lancaster-county-property-sales-2018-ytd/data
   * http://opendata.lincoln.ne.gov/datasets/lancaster-county-property-sales-2017/data
