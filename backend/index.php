@@ -56,10 +56,14 @@ $api = new MicroCollection();
 $api->setHandler(new ApiController());
 $api->setPrefix('/api');
 $api->post('/cities', 'cities');
-$api->get('/cities', 'cities');
-$api->get('/property_types', 'propertyTypes');
-$api->get('/sales', 'sales');
+$api->post('/propertyTypes', 'propertyTypes');
+$api->post('/sales', 'sales');
 $app->mount($api);
 
+try {
+
+} catch (Exception $e) {
+    echo $e->getMessage();
+}
 $app->handle();
 
