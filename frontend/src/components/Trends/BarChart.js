@@ -22,7 +22,7 @@ const getChart = (categories, dataset) => {
     dataSource: {
       chart: {
         bgAlpha: "0",
-        paletteColors: "#0B5345, #2980b9, #641E16, #939393, #8e44ad, #f39c12",
+        paletteColors: "#0B5345, #2980b9, #641E16, #2c3e50, #8e44ad, #f39c12",
         toolTipBgcolor: "#000",
         toolTipColor: "#FDFDFD",
         toolTipPadding: "7",

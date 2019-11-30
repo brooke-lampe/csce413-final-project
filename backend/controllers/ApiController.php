@@ -30,10 +30,11 @@ class ApiController extends Controller
     {
         $months = $this->getMonths();
         $days = $this->getDays();
-        $property_types = $this->getPropertyTypes();
+        $property_types = $this->indexData(PropertyType::class);
+        $cities = $this->indexData(City::class);
 
         $sales = $this->getFilteredSales();
-        list($types_sales, $types_sales_count, $days_sales, $months_sales, $days_types_sales, $months_types_sales) = $this->indexSales($sales);
+        list($types_sales, $types_sales_count, $days_sales, $months_sales, $days_types_sales, $months_types_sales, $years_types_sales, $cities_types_sales) = $this->indexSales($sales);
         $all_types = array_column($sales, 'property_type_id');
         $count = count($sales);
 
@@ -58,17 +59,24 @@ class ApiController extends Controller
         // Types Distribution Stats
         $types_distribution = $this->getTypesDistribution($types_sales, $types_sales_count, $property_types);
 
+
+        // Cities Distribution Stats
+        $cites_distribution = $this->getTrends($cities_types_sales, $all_types, $property_types, $cities);
+
         // Trends Stats
         $days_trends = $this->getTrends($days_types_sales, $all_types, $property_types, $days);
         $months_trends = $this->getTrends($months_types_sales, $all_types, $property_types, $months);
+        $years_trends = $this->getTrends($years_types_sales, $all_types, $property_types, null);
 
         $response = new Response();
         $response->setJsonContent([
             'overview' => $overview,
             'trendsGlance' => $trendsGlance,
             'typesDistribution' => $types_distribution,
+            'citesDistribution' => $cites_distribution,
             'daysTrends' => $days_trends,
-            'monthsTrends' => $months_trends
+            'monthsTrends' => $months_trends,
+            'yearsTrends' => $years_trends
         ]);
 
         return $response;
@@ -147,10 +155,11 @@ class ApiController extends Controller
         ];
     }
 
-    private function getPropertyTypes()
+
+    private function indexData($class)
     {
         $rvalue = [];
-        $data = PropertyType::find()->toArray();
+        $data = $class::find()->toArray();
         foreach ($data as $d) {
             $rvalue[$d['id']] = $d['name'];
         }
@@ -168,7 +177,7 @@ class ApiController extends Controller
         $dataset_types = [];
         ksort($data);
         foreach ($data as $key => $types_sales) {
-            $categories[0]['category'][] = ['label' => $keys[$key]];
+            $categories[0]['category'][] = ['label' => $keys ? $keys[$key] : $key];
             foreach ($all_types as $type_id) {
                 if (!$types_sales[$type_id]) {
                     $types_sales[$type_id] = [0];
@@ -258,10 +267,14 @@ class ApiController extends Controller
         $types_sales_count = [];
         $days_types_sales = [];
         $months_types_sales = [];
+        $years_types_sales = [];
+        $cities_types_sales = [];
         foreach ($sales as $sale) {
             $type = $sale['property_type_id'];
+            $city = $sale['city_id'];
             $day = $sale['day'];
             $month = $sale['month'];
+            $year = substr($sale['date'], 0, 5);
             $price = $sale['price'];
 
             if (!$days_types_sales[$day]) {
@@ -274,6 +287,14 @@ class ApiController extends Controller
                 $months_types_sales[$month][$type] = [];
             }
 
+            if (!$years_types_sales[$year]) {
+                $years_types_sales[$year][$type] = [];
+            }
+
+            if (!$cities_types_sales[$city]) {
+                $cities_types_sales[$city][$type] = [];
+            }
+
             if (!$types_sales[$type]) {
                 $types_sales[$type] = 0;
                 $types_sales_count[$type] = 0;
@@ -281,12 +302,14 @@ class ApiController extends Controller
 
             $days_types_sales[$day][$type][] = $price;
             $months_types_sales[$month][$type][] = $price;
+            $years_types_sales[$year][$type][] = $price;
+            $cities_types_sales[$city][$type][] = $price;
             $days_sales[$day][] = $price;
             $months_sales[$month][] = $price;
             $types_sales[$type] += $price;
             $types_sales_count[$type] += 1;
         }
-        return array($types_sales, $types_sales_count, $days_sales, $months_sales, $days_types_sales, $months_types_sales);
+        return array($types_sales, $types_sales_count, $days_sales, $months_sales, $days_types_sales, $months_types_sales, $years_types_sales, $cities_types_sales);
     }
 
     function nice_number($n) {

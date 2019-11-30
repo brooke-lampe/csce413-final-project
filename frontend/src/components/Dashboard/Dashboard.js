@@ -1,8 +1,8 @@
 import React from "react";
 import Card from "../UI/Card";
 import TypesCharts from "./TypesCharts";
-import CitiesChart from "./CitiesChart";
 import QuickFacts from "./QuickFacts";
+import BarChart from "../Trends/BarChart";
 
 const Dashboard = () => {
   return (
@@ -19,9 +19,11 @@ const Dashboard = () => {
         <QuickFacts dataKey="trendsGlance" />
       </Card>
 
-      <Card title="Cities Distribution" icon="chart bar">
-        <CitiesChart />
-      </Card>
+      <BarChart
+        title="Cities Distribution"
+        icon="chart bar"
+        dataKey="citesDistribution"
+      />
     </div>
   );
 };
