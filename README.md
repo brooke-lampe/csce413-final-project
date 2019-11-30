@@ -2,6 +2,30 @@
 
 A reporting tool for property sale trends in Lincoln, NE, area for buyers and sellers.
 
+## Project Structure
+
+### frontend
+
+* Contains code responsible for the web application's user interface
+* Is written in JavaScript and utilizes the React.js framework and the Fusioncharts.js library
+
+### backend
+
+* Contains code responsible for the web application's server, including database accesses and business logic
+* Is written in PHP and utilizes the Phalcon framework
+
+### data-parser
+
+* Contains code responsible for parsing the raw .csv data files (which are located in data-parser/data), storing them in objects, and inserting them into the database
+* Is written in Java; its solution is set up for the Eclipse IDE
+* NOTE: The data files in data-parser/data are the sanitized data files (modified to facilitate parsing). The original data files can be downloaded here:
+  * http://opendata.lincoln.ne.gov/datasets/lancaster-county-property-sales-2018-ytd/data
+  * http://opendata.lincoln.ne.gov/datasets/lancaster-county-property-sales-2017/data
+  * http://opendata.lincoln.ne.gov/datasets/lancaster-county-property-sales-2016/data
+  * http://opendata.lincoln.ne.gov/datasets/lancaster-county-property-sales-2015/data
+  * http://opendata.lincoln.ne.gov/datasets/lancaster-county-property-sales-2014/data
+  * http://opendata.lincoln.ne.gov/datasets/lancaster-county-property-sales-2013/data
+
 ## Installation
 ### Enable IIS on Windows 10
 1. Type `Turn Windows features on` in the search bar in the bottom left and click on `Turn Windows features on or off`. 
@@ -25,14 +49,26 @@ A reporting tool for property sale trends in Lincoln, NE, area for buyers and se
 4. Open PHP MAnager from IIS window. Under PHP extentions, click on `Enable or disable an extention`, and make sure that php_phalcon is enabled.
 5. Restart the server, and from PHP manager on IIS click on Check phpinfo(). You should see a Phalcon module in the output. 
 
-### Project Installation
+### Backend Installation
 1. Clone the project in C:\ root directory or C:\inetpub directory.
-2. Right click on the project folder and go to the `secuirity` tab. Group and Users list should match the Group and Users list of C:\inetpub\wwwroot directory. So add the missing users.
+2. Right click on the project folder and go to the `security` tab. Group and Users list should match the Group and Users list of C:\inetpub\wwwroot directory. So add the missing users.
 3. Open IIS. Under connection expand until you select `Sites`. Right click and select `Add Website`.
-4. Enter Site name, set the physical path to the public folder in you project directory, and set host name for the server. Mine is `csce413.loc`.
+4. Enter Site name, set the physical path to the `csce413\backend` folder, and set host name `csce413.loc`.
 5. Open hosts file in `C:\Windows\System32\drivers\etc` and add `127.0.0.1 csce413.loc` at the end of the file. 
 6. Create a MySQL database with the name `csce413`.
 7. Change the database password in app/config/config.php with your MySQL root user password. 
-8. Restart the server and go to the link that you chose for your server. e.g `csce413.loc`.
+8. Run the migration queries in `csce413\data-parser\data\migrations.sql`. Make sure that your `csce413` database is existent and EMPTY.
+9. Fill in your database by importing `csce413\data-parser\data\data.sql` in your `csce413` database. 
+10. Restart the server and test the API by navigating to `csce413.loc/api/cities`. A list of cities should be returned. 
+
+
+### Frontend Installation
+1. Install npm and node.
+2. `cd frontend`
+2. `npm install`
+3. `npm start`
+4. This should set up a development server for the frontend at `http://localhost:3000/`.
+5. Navigate to  `http://localhost:3000/` and make sure that a list of two cities are logged in console. 
+
 
 `
