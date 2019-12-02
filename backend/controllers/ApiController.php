@@ -4,6 +4,7 @@
 namespace Controllers;
 
 use Models\City;
+use Models\MedianSale;
 use Models\PropertyType;
 use Models\Sale;
 use Phalcon\Http\Response;
@@ -33,7 +34,7 @@ class ApiController extends Controller
         $property_types = $this->indexData(PropertyType::class);
         $cities = $this->indexData(City::class);
 
-        $sales = $this->getFilteredSales();
+        list($sales, $median_sales) = $this->getFilteredSales();
         list($types_sales, $types_sales_count, $days_sales, $months_sales, $days_types_sales, $months_types_sales, $years_types_sales, $cities_types_sales) = $this->indexSales($sales);
         $all_types = array_column($sales, 'property_type_id');
         $count = count($sales);
@@ -64,6 +65,7 @@ class ApiController extends Controller
         $cites_distribution = $this->getTrends($cities_types_sales, $all_types, $property_types, $cities);
 
         // Trends Stats
+        $overview_trends = $this->getOverviewTrends($median_sales, $property_types);
         $days_trends = $this->getTrends($days_types_sales, $all_types, $property_types, $days);
         $months_trends = $this->getTrends($months_types_sales, $all_types, $property_types, $months);
         $years_trends = $this->getTrends($years_types_sales, $all_types, $property_types, null);
@@ -74,6 +76,7 @@ class ApiController extends Controller
             'trendsGlance' => $trendsGlance,
             'typesDistribution' => $types_distribution,
             'citesDistribution' => $cites_distribution,
+            'overviewTrends' => $overview_trends,
             'daysTrends' => $days_trends,
             'monthsTrends' => $months_trends,
             'yearsTrends' => $years_trends
@@ -82,7 +85,20 @@ class ApiController extends Controller
         return $response;
     }
 
-    private function getTypesDistribution($types_sales, $types_sales_count, $property_types) {
+    private function getOverviewTrends($median_sales, $types)
+    {
+        $data = [];
+        foreach ($median_sales as $sale) {
+            $date = date("d-M-y", strtotime($sale['date']));
+            $type = $types[$sale['property_type_id']];
+            $value = $sale['price'];
+            $data[] = [$date, $type, $value];
+        }
+        return $data;
+    }
+
+    private function getTypesDistribution($types_sales, $types_sales_count, $property_types)
+    {
         $types_distribution = ['sales' => ['total' => 0, 'data' => []], 'count' => ['total' => 0, 'data' => []]];
         ksort($types_sales);
         foreach ($types_sales as $type => $med_price) {
@@ -252,7 +268,14 @@ class ApiController extends Controller
             'bind' => $bind,
             'order' => 'price'
         ])->toArray();
-        return $sales;
+
+        $median_sales = MedianSale::find([
+            'conditions' => $conditions,
+            'bind' => $bind,
+            'order' => 'date'
+        ])->toArray();
+
+        return array($sales, $median_sales);
     }
 
     /**
@@ -312,18 +335,19 @@ class ApiController extends Controller
         return array($types_sales, $types_sales_count, $days_sales, $months_sales, $days_types_sales, $months_types_sales, $years_types_sales, $cities_types_sales);
     }
 
-    function nice_number($n) {
+    function nice_number($n)
+    {
         // first strip any formatting;
-        $n = (0+str_replace(",","",$n));
+        $n = (0 + str_replace(",", "", $n));
 
         // is this a number?
-        if(!is_numeric($n)) return false;
+        if (!is_numeric($n)) return false;
 
         // now filter it;
-        if($n>1000000000000) return round(($n/1000000000000),1).'T';
-        else if($n>1000000000) return round(($n/1000000000),1).'B';
-        else if($n>1000000) return round(($n/1000000),1).'M';
-        else if($n>1000) return round(($n/1000),1).'K';
+        if ($n > 1000000000000) return round(($n / 1000000000000), 1) . 'T';
+        else if ($n > 1000000000) return round(($n / 1000000000), 1) . 'B';
+        else if ($n > 1000000) return round(($n / 1000000), 1) . 'M';
+        else if ($n > 1000) return round(($n / 1000), 1) . 'K';
 
         return number_format($n);
     }

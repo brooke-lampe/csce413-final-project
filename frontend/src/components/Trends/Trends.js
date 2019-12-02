@@ -17,7 +17,7 @@ const ConnectedTrends = ({ activeTrend }) => {
       <div
         className={activeTrend === TRENDS.OVERVIEW ? "trend active" : "trend"}
       >
-        <Overview />
+        <Overview dataKey="overviewTrends" />
       </div>
 
       <div className={activeTrend === TRENDS.DAYS ? "trend active" : "trend"}>

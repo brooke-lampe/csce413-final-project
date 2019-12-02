@@ -16,11 +16,11 @@ function mapDispatchToProps(dispatch) {
 
 const ConnectedSideBar = ({ activeView, setActiveView }) => (
   <div className="side-bar">
-    <div className="title">Property Sales Analytics</div>
+    <div className="title">Lancaster Realty Analytics</div>
     <div className="items-wrapper">
       <div className={activeView === VIEWS.DASHBOARD ? "item active" : "item"}>
         <span onClick={() => setActiveView(VIEWS.DASHBOARD)}>
-          <Icon name="dashboard" /> Dashboard
+          <Icon name="dashboard" /> Overview
         </span>
       </div>
       <div className={activeView === VIEWS.TRENDS ? "item active" : "item"}>

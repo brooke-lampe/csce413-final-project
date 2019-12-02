@@ -31,7 +31,7 @@ const ConnectedTrendsList = ({ activeTrend, setActiveTrend }) => (
         }
         onClick={() => setActiveTrend(TRENDS.DAYS)}
       >
-        Days
+        Week Days
       </List.Item>
       <List.Item
         className={

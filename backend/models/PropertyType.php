@@ -8,6 +8,7 @@ use Phalcon\Mvc\Model;
 class PropertyType extends Model
 {
     public $id;
+    public $short_name;
     public $name;
 
     public function initialize()

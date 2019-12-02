@@ -7,7 +7,7 @@ import BarChart from "../Trends/BarChart";
 const Dashboard = () => {
   return (
     <div className="dashboard">
-      <Card title="Overview" icon="dashboard">
+      <Card title="Statistics" icon="dashboard">
         <QuickFacts dataKey="overview" />
       </Card>
 

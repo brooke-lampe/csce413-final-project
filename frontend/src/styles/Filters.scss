@@ -18,6 +18,12 @@
 		}
 	}
 }
+
+.overview-chart {
+	text {
+		fill: #e3e3e3;
+	}
+}
 svg {
 	background-color: transparent !important;
 }
@@ -63,7 +69,7 @@ svg {
 
 			&.active span {
 				border-right-color: white;
-				color: white;
+				color: white !important;
 			}
 
 			&:hover span {
@@ -94,6 +100,7 @@ svg {
 		border-radius: 20px;
 		min-width: 70px;
 		text-align: center;
+		font-size: 0.95em;
 		cursor: pointer;
 		transition: background-color 0.25s ease;
 
@@ -107,7 +114,7 @@ svg {
 
 		&.active {
 			background-color: #d9d9d9;
-			color: #094237;
+			color: #1A1A1A;
 		}
 	}
 }
