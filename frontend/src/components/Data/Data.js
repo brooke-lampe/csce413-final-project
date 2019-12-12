@@ -53,10 +53,10 @@ class ConnectedData extends React.Component {
                 </Table.Row>
               ))
             ) : (
-                <Table.Row>
-                  <Table.Cell colSpan="4">No data to display</Table.Cell>
-                </Table.Row>
-              )}
+              <Table.Row>
+                <Table.Cell colSpan="4">No data to display</Table.Cell>
+              </Table.Row>
+            )}
           </Table.Body>
 
           <Table.Footer>
