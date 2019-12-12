@@ -1,0 +1,246 @@
+body {
+    background-color: #1A1A1A !important;
+}
+.ui.container.app-container {
+    max-width: 1280px !important;
+    background-color: #1A1A1A;
+}
+
+.react-datepicker-wrapper {
+	display: block;
+}
+.body-wrapper {
+	padding: 1em 1em 0 0;
+
+	.view,
+	.trend {
+		height: 0px;
+		overflow: hidden;
+		visibility: hidden;
+		opacity: 0;
+		transition: opacity 0.25s ease-in-out;
+
+		&.active {
+			visibility: visible;
+			opacity: 1;
+			height: 100%;
+		}
+	}
+}
+
+.overview-chart {
+	text {
+		fill: #e3e3e3;
+	}
+}
+svg {
+	background-color: transparent !important;
+}
+
+.column.side-bar-column {
+	padding-right: 0 !important;
+	padding-bottom: 0 !important;
+}
+
+.side-bar {
+	height: 100%;
+	background-color: #094237;
+	color: white;
+
+	.title {
+		padding: 2.5em 1em;
+		text-align: center;
+		font-size: 1.4em;
+		font-weight: 600;
+		line-height: 1.5em;
+		letter-spacing: 1.5px;
+		word-spacing: 2px;
+	}
+
+	.items-wrapper {
+		padding-left: 1.8em;
+		color: #c9c9c9;
+		font-size: 1.15em;
+		font-weight: 600;
+
+		.item {
+			padding: 1.2em 0;
+			transition: color 0.25s ease;
+
+			span {
+				display: block;
+				border-right: 3px solid;
+				line-height: 2em;
+				border-right-color: #094237;
+				transition: border-right-color 0.25s ease;
+				cursor: pointer;
+			}
+
+			&.active span {
+				border-right-color: white;
+				color: white !important;
+			}
+
+			&:hover span {
+				color: #e9e9e9;
+			}
+		}
+	}
+}
+
+.trends-list-wrapper {
+	// display: flex;
+	// justify-content: center;
+	// align-items: center;
+	margin-bottom: 1.5em;
+}
+
+.ui.horizontal.relaxed.list.trends-list {
+	background-color: #0b5345;
+	border-radius: 30px;
+	color: white;
+	font-weight: 600;
+	font-size: 1.1em;
+	min-width: 20em;
+
+	.list-item.item {
+		margin: 0.5em;
+		padding: 10px !important;
+		border-radius: 20px;
+		min-width: 70px;
+		text-align: center;
+		font-size: 0.95em;
+		cursor: pointer;
+		transition: background-color 0.25s ease;
+
+		&:first-child {
+			margin-left: 1.5em !important;
+		}
+
+		&:last-child {
+			margin-right: 1.5em !important;
+		}
+
+		&.active {
+			background-color: #d9d9d9;
+			color: #1a1a1a;
+		}
+	}
+}
+
+.data {
+	.ui.inverted.table {
+		border: none !important;
+
+		th {
+			background: #094237 !important;
+			color: white !important;
+		}
+
+		tbody {
+			tr:nth-child(even) td {
+				background-color: #1e1e1e;
+			}
+
+			tr:nth-child(odd) td {
+				background-color: #121212;
+			}
+		}
+
+		tfoot th {
+			border: none;
+		}
+	}
+}
+
+.ui.fluid.card {
+	box-shadow: none;
+	background-color: #094237;
+
+	& > .content > .header {
+		color: white;
+	}
+
+	.body {
+		border-top: 1px solid #2e2e2e;
+		background-color: #1e1e1e;
+		min-height: 10em;
+		position: relative;
+
+		.middle.aligned.column {
+			border-right: 1px solid #2e2e2e;
+			border-left: 1px solid #2e2e2e;
+		}
+
+		.middle.aligned.column:first-child {
+			border-left: none;
+		}
+
+		.middle.aligned.column:last-child {
+			border-right: none;
+		}
+	}
+}
+
+.card-grid {
+	min-height: 11em;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}
+
+.quick-fact {
+	text-align: center;
+	color: #d9d9d9;
+
+	.text {
+		font-size: 1.3em;
+		font-weight: 600;
+		margin-bottom: 1em;
+	}
+
+	.value {
+		font-weight: 600;
+	}
+}
+
+.filters-wrapper {
+	padding: 1em;
+	border-radius: 5px;
+	// border: 1px solid rgba(72,72,72,.17)!important;
+	background-color: #252525;
+	margin-bottom: 1em;
+
+	.ui.form .field > label {
+		color: #e3e3e3;
+	}
+
+	.ui.selection.dropdown,
+	.ui.form input[type='text'],
+	.ui.form input[type='text']:focus {
+		background-color: #e3e3e3;
+	}
+
+	.ui.button {
+		background-color: #094237;
+		color: white;
+
+		&:hover,
+		&:active,
+		&:focus {
+			background-color: #0b5345;
+			color: white;
+		}
+	}
+
+	.react-datepicker__day--selected,
+	.react-datepicker__day--in-selecting-range,
+	.react-datepicker__day--in-range,
+	.react-datepicker__month-text--selected,
+	.react-datepicker__month-text--in-selecting-range,
+	.react-datepicker__month-text--in-range,
+	.react-datepicker__quarter-text--selected,
+	.react-datepicker__quarter-text--in-selecting-range,
+	.react-datepicker__quarter-text--in-range {
+		background-color: #094237;
+	}
+}

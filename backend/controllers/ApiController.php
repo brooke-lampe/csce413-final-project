@@ -34,7 +34,7 @@ class ApiController extends Controller
         $property_types = $this->indexData(PropertyType::class);
         $cities = $this->indexData(City::class);
 
-        list($sales, $median_sales) = $this->getFilteredSales();
+        list($sales, $median_sales, $sales_data) = $this->getFilteredSales();
         list($types_sales, $types_sales_count, $days_sales, $months_sales, $days_types_sales, $months_types_sales, $years_types_sales, $cities_types_sales) = $this->indexSales($sales);
         $all_types = array_column($sales, 'property_type_id');
         $count = count($sales);
@@ -70,6 +70,9 @@ class ApiController extends Controller
         $months_trends = $this->getTrends($months_types_sales, $all_types, $property_types, $months);
         $years_trends = $this->getTrends($years_types_sales, $all_types, $property_types, null);
 
+        // Data table
+        $sales_data = $this->getSalesData($sales_data, $count, $property_types, $cities);
+
         $response = new Response();
         $response->setJsonContent([
             'overview' => $overview,
@@ -79,10 +82,27 @@ class ApiController extends Controller
             'overviewTrends' => $overview_trends,
             'daysTrends' => $days_trends,
             'monthsTrends' => $months_trends,
-            'yearsTrends' => $years_trends
+            'yearsTrends' => $years_trends,
+            'salesData' => $sales_data
         ]);
 
         return $response;
+    }
+
+    private function getSalesData($sales, $count, $property_types, $cities) {
+        $rvalue = [];
+        for ($i = $count - 1; $i >= 0; $i--) {
+            $sale = $sales[$i];
+            $rvalue[] = [
+                'id' => $sale['id'],
+                'date' => date("d-M-y", strtotime($sale['date'])),
+                'city' => $cities[$sale['city_id']],
+                'type' => $property_types[$sale['property_type_id']],
+                'price' => $this->nice_number($sale['price'])
+            ];
+        }
+
+        return $rvalue;
     }
 
     private function getOverviewTrends($median_sales, $types)
@@ -269,13 +289,19 @@ class ApiController extends Controller
             'order' => 'price'
         ])->toArray();
 
+        $sales_data = Sale::find([
+            'conditions' => $conditions,
+            'bind' => $bind,
+            'order' => 'date, city_id, property_type_id'
+        ])->toArray();
+
         $median_sales = MedianSale::find([
             'conditions' => $conditions,
             'bind' => $bind,
-            'order' => 'date'
+            'order' => 'date, city_id, property_type_id'
         ])->toArray();
 
-        return array($sales, $median_sales);
+        return array($sales, $median_sales, $sales_data);
     }
 
     /**

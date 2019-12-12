@@ -20,7 +20,7 @@ const ConnectedSideBar = ({ activeView, setActiveView }) => (
     <div className="items-wrapper">
       <div className={activeView === VIEWS.DASHBOARD ? "item active" : "item"}>
         <span onClick={() => setActiveView(VIEWS.DASHBOARD)}>
-          <Icon name="dashboard" /> Overview
+          <Icon name="dashboard" /> Dashboard
         </span>
       </div>
       <div className={activeView === VIEWS.TRENDS ? "item active" : "item"}>

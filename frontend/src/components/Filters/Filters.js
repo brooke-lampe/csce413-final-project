@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { Form, Button } from "semantic-ui-react";
 import FilterItem from "./FilterItem";
-import "../../styles/Filters.scss";
 import { applyFilters } from "../../redux/actions";
 
 const mapStateToProps = state => {

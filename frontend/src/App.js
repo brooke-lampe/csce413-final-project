@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, Container } from "semantic-ui-react";
 import SideBar from "./components/SideBar.js";
 import Body from "./components/Body.js";
-import "./styles/App.scss";
+import "./styles/styles.scss";
 
 const App = () => (
   <Container fluid className="app-container">
