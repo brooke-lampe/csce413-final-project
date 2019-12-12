@@ -57,9 +57,9 @@ A reporting tool for property sale trends in Lincoln, NE, area for buyers and se
 5. Open hosts file in `C:\Windows\System32\drivers\etc` and add `127.0.0.1 csce413.loc` at the end of the file. 
 6. Create a MySQL database with the name `csce413`.
 7. Change the database password in app/config/config.php with your MySQL root user password. 
-8. Run the migration queries in `csce413\data-parser\data\migrations.sql`. Make sure that your `csce413` database is existent and EMPTY.
-9. Fill in your database by importing `csce413\data-parser\data\data.sql` in your `csce413` database. 
-10. Restart the server and test the API by navigating to `csce413.loc/api/cities`. A list of cities should be returned. 
+8. Make sure that your `csce413` database exitsts and is EMPTY.
+9. From the project root directory, run `mysql -u root -p csce413 < data.sql` to import the data to `csce13` database. 
+10.Restart the server and test the API by navigating to `csce413.loc/api/test_api`. A list of cities should be returned. 
 
 
 ### Frontend Installation
@@ -68,7 +68,6 @@ A reporting tool for property sale trends in Lincoln, NE, area for buyers and se
 2. `npm install`
 3. `npm start`
 4. This should set up a development server for the frontend at `http://localhost:3000/`.
-5. Navigate to  `http://localhost:3000/` and make sure that a list of two cities are logged in console. 
 
 
 `
