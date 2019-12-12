@@ -56,6 +56,7 @@ $api = new MicroCollection();
 $api->setHandler(new ApiController());
 $api->setPrefix('/api');
 $api->post('/cities', 'cities');
+$api->get('/test_api', 'cities');
 $api->post('/propertyTypes', 'propertyTypes');
 $api->post('/sales', 'sales');
 $app->mount($api);
